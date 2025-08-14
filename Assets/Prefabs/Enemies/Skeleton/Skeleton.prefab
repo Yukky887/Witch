@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1427947415203297954}
   - component: {fileID: 5023127362737372551}
   - component: {fileID: 7028093703566811981}
-  - component: {fileID: 2235427037821733674}
   - component: {fileID: 3615854570798612107}
   - component: {fileID: 5725185988295332603}
   m_Layer: 0
@@ -99,26 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae46f1efaefea04c86fe942304daa7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingState: 1
-  roamingDistanceMax: 7
-  roamingDistanceMin: 3
-  roamingTimerMax: 2
---- !u!114 &2235427037821733674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965074987906513991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ae46f1efaefea04c86fe942304daa7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingState: 1
-  roamingDistanceMax: 7
-  roamingDistanceMin: 3
-  roamingTimerMax: 2
+  _startingState: 0
+  _roamingDistanceMax: 7
+  _roamingDistanceMin: 3
+  _roamingTimerMax: 2
+  _isCheasing: 0
+  _chasingDistance: 5
+  _chasingSpeedMultiplier: 2
+  _isAttackingEnemy: 0
+  _attackRete: 2
 --- !u!61 &3615854570798612107
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +139,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.25845253, y: 0.74899685}
+  m_Offset: {x: 0.25845253, y: 1.247854}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -162,7 +150,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1088221, y: 1.5548692}
+  m_Size: {x: 1.1088221, y: 2.5525832}
   m_EdgeRadius: 0
 --- !u!114 &5725185988295332603
 MonoBehaviour:
@@ -176,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06ed0c45952fac4ca7a04caaf58350c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
+  _maxHealth: 12
 --- !u!1 &2200924801640837734
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +260,7 @@ GameObject:
   - component: {fileID: 659338930302568613}
   - component: {fileID: 8564742182766739659}
   - component: {fileID: 5534514839533525733}
+  - component: {fileID: 6462519843925581515}
   m_Layer: 0
   m_Name: SkeletonVisual
   m_TagString: Untagged
@@ -368,3 +357,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6462519843925581515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7472258267111388845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14c0ed04933a604d827f43c1ff3ea57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

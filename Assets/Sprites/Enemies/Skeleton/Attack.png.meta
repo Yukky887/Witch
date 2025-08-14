@@ -145,7 +145,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 212595aa4b7b3314f84a0ef053f9da20
+      spriteID: 6221de2e8a548b044a15875663cf9309
       internalID: -1840055552
       vertices: []
       indices: 
@@ -155,7 +155,7 @@ TextureImporter:
       name: Attack_2
       rect:
         serializedVersion: 2
-        x: 301
+        x: 300
         y: 0
         width: 150
         height: 150
@@ -166,7 +166,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26d83f05c1cd3124d8b23f3f1165ac2a
+      spriteID: 85b78ba609792be41846d5392c306942
       internalID: -775969962
       vertices: []
       indices: 
@@ -187,7 +187,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e52896b3be912ae4f9b54cf56a64e7d6
+      spriteID: bae3e284b09626d48be8f8731b76b245
       internalID: 467554296
       vertices: []
       indices: 
@@ -208,7 +208,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4943246385d92f448988c53502af7b9
+      spriteID: 597f67072057b7b49b47256ed42a7c6a
       internalID: 1409626734
       vertices: []
       indices: 
@@ -229,7 +229,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 456fca7e5d4ea3242b73e8175ccebbef
+      spriteID: 1869178b729dee0469428872e6c45c49
       internalID: -69238810
       vertices: []
       indices: 
@@ -250,7 +250,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cb9af2bc08b0744ba9c9110b71ef641
+      spriteID: 167fb3a5bfcfb2b4587c63772519c7c9
       internalID: -1771292677
       vertices: []
       indices: 
@@ -271,7 +271,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a042d9f14effd948a48bd2b22f794ff
+      spriteID: 75bedab3b4073a9428cf5608787f1cb0
       internalID: -1277206326
       vertices: []
       indices: 
