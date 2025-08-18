@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using WildBerry.Utils;
@@ -104,42 +102,10 @@ public class EnemyAI : MonoBehaviour
 
 	#endregion
 
-	#region Свойства
-
-	/// <summary>
-	/// Бежит ли враг в данный момент.
-	/// </summary>
-	public bool IsRunning
-	{
-		get
-		{
-
-			if (_navMeshAgent.velocity == Vector3.zero)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-		}
-	}
 
 
-	#endregion
 
-	/// <summary>
-	/// Состояния врага в игре.
-	/// </summary>
-	private enum State
-	{
-		Idle,
-		Roaming,
-		Chasing,
-		Attacking,
-		Dead
-	}
-
+	#region Методы
 	private void Awake()
 	{
 		_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -156,7 +122,14 @@ public class EnemyAI : MonoBehaviour
 		MovementDurectionHandler();
 	}
 
-	#region Методы
+	/// <summary>
+	/// Скорость анимации блуждания врага.
+	/// </summary>
+	/// <returns>Скорость блуждания.</returns>
+	public float GetRoamingAnimationSpeed()
+	{
+		return _navMeshAgent.speed / _roamingSpeed;
+	}
 
 	/// <summary>
 	/// Выбор состояния врага и выполнение соответствующих действий.
@@ -244,15 +217,6 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Скорость анимации блуждания врага.
-	/// </summary>
-	/// <returns>Скорость блуждания.</returns>
-	public float GetRoamingAnimationSpeed()
-	{
-		return _navMeshAgent.speed / _roamingSpeed;
-	}
-
-	/// <summary>
 	/// Враг атакует цель.
 	/// </summary>
 	private void AttackingTarget()
@@ -314,8 +278,44 @@ public class EnemyAI : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Состояния врага в игре.
+	/// </summary>
+	private enum State
+	{
+		Idle,
+		Roaming,
+		Chasing,
+		Attacking,
+		Dead
+	}
+
 	#endregion
 
+	#region Свойства
+
+	/// <summary>
+	/// Бежит ли враг в данный момент.
+	/// </summary>
+	public bool IsRunning
+	{
+		get
+		{
+
+			if (_navMeshAgent.velocity == Vector3.zero)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
+
+
+	#endregion
+	
 	#region События Unity
 
 	public event Action OnEnemyAttack;
