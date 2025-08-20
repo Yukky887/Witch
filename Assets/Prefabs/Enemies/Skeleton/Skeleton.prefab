@@ -99,14 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae46f1efaefea04c86fe942304daa7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingState: 0
+  _startingState: 1
   _roamingDistanceMax: 7
   _roamingDistanceMin: 3
   _roamingTimerMax: 2
-  _isCheasing: 0
+  _isCheasing: 1
   _chasingDistance: 5
   _chasingSpeedMultiplier: 2
-  _isAttackingEnemy: 0
+  _isAttackingEnemy: 1
   _attackRete: 1
 --- !u!61 &3615854570798612107
 BoxCollider2D:
@@ -137,7 +137,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.25845253, y: 1.247854}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06ed0c45952fac4ca7a04caaf58350c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 12
+  _enemy: {fileID: 11400000, guid: 55b8285be3298e1459aee7d8f515768c, type: 2}
 --- !u!60 &87991639552864449
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965074987906513991}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -436,3 +436,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAI: {fileID: 7028093703566811981}
   _enemyEntity: {fileID: 5725185988295332603}
+  _enemyShadow: {fileID: 2200924801640837734}

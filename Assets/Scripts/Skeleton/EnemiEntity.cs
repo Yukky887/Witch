@@ -1,27 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 /// <summary>
 /// —сылаемс€ на объект, который должен быть добавлен в инспекторе Unity.
 /// </summary>
 [RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(EnemyAI))]
 public class EnemiEntity : MonoBehaviour
 {
-	[SerializeField] private int _maxHealth;
+
+	[SerializeField] private Enemy _enemy;
+	//[SerializeField] private int _maxHealth;
+
+	public event Action OnTakeHit;
+
+	public event Action OnDie;
 
 	private int _currentHealth;
 
 	private PolygonCollider2D _collider;
 
+	private BoxCollider2D _boxCollaider;
+
+	private EnemyAI _enemyAI;
+
 	private void Awake()
 	{
 		_collider = GetComponent<PolygonCollider2D>();
+		_boxCollaider = GetComponent<BoxCollider2D>();
+		_enemyAI = GetComponent<EnemyAI>();
 	}
 
 	private void Start()
 	{
-		_currentHealth = _maxHealth;
+		_currentHealth = _enemy.enemyHealth;
 	}
 
 	/// <summary>
@@ -57,6 +70,8 @@ public class EnemiEntity : MonoBehaviour
 	{
 		_currentHealth -= damage;
 
+		OnTakeHit?.Invoke();
+
 		DetectDeath();
 	}
 
@@ -67,8 +82,10 @@ public class EnemiEntity : MonoBehaviour
 	{
 		if (_currentHealth <= 0)
 		{
-			//Die();
-			Destroy(gameObject);
+			_boxCollaider.enabled = false;
+			_collider.enabled = false;
+			_enemyAI.SetDeadState();
+			OnDie?.Invoke();
 		}
 	}
 

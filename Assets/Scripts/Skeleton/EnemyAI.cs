@@ -102,9 +102,6 @@ public class EnemyAI : MonoBehaviour
 
 	#endregion
 
-
-
-
 	#region Ìועמהû
 	private void Awake()
 	{
@@ -120,6 +117,13 @@ public class EnemyAI : MonoBehaviour
 	{
 		StateHandler();
 		MovementDurectionHandler();
+	}
+
+	public void SetDeadState()
+	{
+		_navMeshAgent.ResetPath();
+		_currentState = State.Dead;
+		_navMeshAgent.ResetPath();
 	}
 
 	/// <summary>
