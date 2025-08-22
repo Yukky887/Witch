@@ -37,6 +37,16 @@ public class EnemiEntity : MonoBehaviour
 		_currentHealth = _enemy.enemyHealth;
 	}
 
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.transform.TryGetComponent(out Player player))
+		{
+			player.TakeDamage(transform, _enemy.enemyDamageAmount);
+		}
+		
+	}
+
 	/// <summary>
 	/// Обрабатывает пересечение коллайдера меча скелета с другими.
 	/// </summary>

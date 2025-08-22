@@ -10,7 +10,7 @@ public class GameInput : MonoBehaviour
     public static GameInput Instance { get; private set; }
 
     private PlayerInputActions playerInputActions;
-
+     
     /// <summary>
     /// Нажатие на кнопку аттаки. 
     /// </summary>
@@ -54,4 +54,8 @@ public class GameInput : MonoBehaviour
         return mousePos;
     }
 
+    public void DisableMovment()
+    {
+        playerInputActions.Disable();
+	}
 }

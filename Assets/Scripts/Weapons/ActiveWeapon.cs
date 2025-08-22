@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 /// <summary>
 /// Определяет активное оружие игрока в игре.
@@ -13,7 +14,10 @@ public class ActiveWeapon : MonoBehaviour
 
 	private void Update()
 	{
-		FillowMausPosition();
+		if (Player.Instance.IsAlive())
+		{
+			FillowMausPosition();
+		}
 	}
 
 	/// <summary>

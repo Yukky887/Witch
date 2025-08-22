@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52824881}
   - component: {fileID: 52824879}
+  - component: {fileID: 52824884}
   - component: {fileID: 52824878}
   - component: {fileID: 52824882}
   - component: {fileID: 52824883}
@@ -155,7 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cbb6d698bac5b458dfe83c7a90d846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: 5
+  _movingSpeed: 5
+  _maxHealth: 3
+  _damageRecoveryTime: 0.5
 --- !u!50 &52824879
 Rigidbody2D:
   serializedVersion: 4
@@ -280,6 +283,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8135257, y: 1.9820981}
   m_EdgeRadius: 0
+--- !u!114 &52824884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52824877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f396c88b6cc89bd499c8604cfbc09c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _knockBackForce: 3
+  _knockBackMovingTimerMax: 0.3
 --- !u!1 &129168237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1364,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -17.151
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 945730233238852685, guid: 98a52e5c64559074c839c90d3df92ebe, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1360,6 +1378,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 87991639552864449, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 965074987906513991, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
       propertyPath: m_Name
       value: Skeleton

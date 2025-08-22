@@ -17,6 +17,8 @@ public class PlayerVisual : MonoBehaviour
 	/// </summary>
 	private const string isRunning = "IsRunning";
 
+	private const string IS_DIE = "isDie";
+
 
 	/// <summary>
 	/// Инициализация компонентов игрока при запуске.
@@ -27,13 +29,28 @@ public class PlayerVisual : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+	private void Start()
+	{
+		Player.Instance.OnPlayerDeath += Player_OnPlayerDeath;
+	}
+
+	private void Player_OnPlayerDeath()
+	{
+		animator.SetBool(IS_DIE, true);
+	}
+
 	/// <summary>
 	/// Обновляет визуальные эффекты игрока каждый кадр.
 	/// </summary>
 	private void Update()
     {
-        animator.SetBool(isRunning, Player.Instance.IsRunning());
-        AdjustPlayerFacingDirection(); 
+		animator.SetBool(isRunning, Player.Instance.IsRunning());
+		
+		if (Player.Instance.IsAlive())
+		{
+			AdjustPlayerFacingDirection(); 
+		}
+
     }
 
 	/// <summary>
