@@ -186,7 +186,14 @@ public class EnemyAI : MonoBehaviour
 
 		if (_isAttackingEnemy && distanceToPlayer <= _attackDistance)
 		{
-			newState = State.Attacking;
+			if (Player.Instance.IsAlive())
+			{
+				newState = State.Attacking;
+			}
+			else
+			{
+				newState = State.Roaming;
+			}
 		}
 
 		if (newState != _currentState)
@@ -210,6 +217,7 @@ public class EnemyAI : MonoBehaviour
 
 			_currentState = newState;
 		}
+		
 	}
 
 	/// <summary>

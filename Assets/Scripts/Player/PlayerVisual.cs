@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
+	[SerializeField] private Player _player;
+	[SerializeField] private FlashBlink _flashBlink;
+
 	/// <summary>
 	/// Аниматор для управления анимациями игрока.
 	/// </summary>
-	private Animator animator;
+	private Animator _animator;
 
 	/// <summary>
 	/// Рендерер спрайта для управления визуальным отображением игрока.
@@ -19,15 +22,15 @@ public class PlayerVisual : MonoBehaviour
 
 	private const string IS_DIE = "isDie";
 
-
 	/// <summary>
 	/// Инициализация компонентов игрока при запуске.
 	/// </summary>
 	private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-    }
+        _animator = GetComponent<Animator>();
+		_flashBlink = GetComponent<FlashBlink>();
+	}
 
 	private void Start()
 	{
@@ -36,7 +39,8 @@ public class PlayerVisual : MonoBehaviour
 
 	private void Player_OnPlayerDeath()
 	{
-		animator.SetBool(IS_DIE, true);
+		_animator.SetBool(IS_DIE, true);
+		_flashBlink.StopBlinking();
 	}
 
 	/// <summary>
@@ -44,7 +48,7 @@ public class PlayerVisual : MonoBehaviour
 	/// </summary>
 	private void Update()
     {
-		animator.SetBool(isRunning, Player.Instance.IsRunning());
+		_animator.SetBool(isRunning, Player.Instance.IsRunning());
 		
 		if (Player.Instance.IsAlive())
 		{

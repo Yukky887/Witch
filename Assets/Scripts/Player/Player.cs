@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public static Player Instance { get; private set; }
 
+	public event Action TakeHit;
+
 	/// <summary>
 	/// Инициализация игрока.
 	/// </summary>
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
 	{
 		if (_canTakeDamage && _isAlive)
 		{
+			TakeHit?.Invoke();
 			_canTakeDamage = false;
 			_currentHealth = Mathf.Max(0, _currentHealth -= damage);
 			Debug.Log(_currentHealth);
