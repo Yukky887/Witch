@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8156174510028914956
+--- !u!1 &7281640649567064080
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 756496443768151930}
-  - component: {fileID: 1804909785112569647}
-  - component: {fileID: 8586078687260700354}
-  - component: {fileID: 5499230072378023335}
+  - component: {fileID: 7979875104759481271}
+  - component: {fileID: 2049920107922098250}
+  - component: {fileID: 4048123938004161376}
   m_Layer: 0
-  m_Name: Bush
+  m_Name: BusVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &756496443768151930
+--- !u!4 &7979875104759481271
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156174510028914956}
+  m_GameObject: {fileID: 7281640649567064080}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.3790894, y: -1.4542382, z: -0.30539176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 756496443768151930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1804909785112569647
+--- !u!212 &2049920107922098250
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156174510028914956}
+  m_GameObject: {fileID: 7281640649567064080}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -86,6 +85,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4048123938004161376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281640649567064080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764d54be8a23b454789e9bdee34ee900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructPlants: {fileID: 613975654079947312}
+  bushDeathVFXPrefab: {fileID: 3495472336676208194, guid: 8ddf0e1f83b58694ca5cbd6c598f6034, type: 3}
+--- !u!1 &8156174510028914956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756496443768151930}
+  - component: {fileID: 8586078687260700354}
+  - component: {fileID: 5499230072378023335}
+  - component: {fileID: 613975654079947312}
+  m_Layer: 0
+  m_Name: Bush
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756496443768151930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156174510028914956}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.3790894, y: -1.4542382, z: -0.30539176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7979875104759481271}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &8586078687260700354
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,3 +185,15 @@ MonoBehaviour:
   m_Center: {x: -0.03885746, y: 0.26627773, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &613975654079947312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156174510028914956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baad4fc379cce854f950728bfe3876e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

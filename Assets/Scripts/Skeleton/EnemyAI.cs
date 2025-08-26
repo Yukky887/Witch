@@ -5,65 +5,64 @@ using WildBerry.Utils;
 
 public class EnemyAI : MonoBehaviour
 {
-	#region Компоненты и переменные
 	/// <summary>
-	/// Cостояние врага при запуске игры.
+	/// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private State _startingState;
 
 	/// <summary>
-	/// Максимальная дистанция для блуждания врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private float _roamingDistanceMax = 7f;
 
 	/// <summary>
-	/// Минимальная дистанция для блуждания врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private float _roamingDistanceMin = 3f;
 
 	/// <summary>
-	/// Максимальное время, которое враг может блуждать в одном направлении.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private float _roamingTimerMax = 2f;
 
 	/// <summary>
-	/// Приследуюущий ли враг.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private bool _isCheasing = false;
 
 	/// <summary>
-	/// Расстояние, на котором враг начинает преследовать игрока.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private float _chasingDistance = 5f;
 
 	/// <summary>
-	/// Множитель скорости врага при преследовании.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private float _chasingSpeedMultiplier = 2f;
 
 	/// <summary>
-	/// Является ли враг атакующим.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private bool _isAttackingEnemy = false;
 
 	/// <summary>
-	/// Множитель частоты атак врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private float _attackRete = 2f;
 
 
 	/// <summary>
-	/// Точка навигации для врага.
+	/// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private NavMeshAgent _navMeshAgent;
 
 	/// <summary>
-	/// Расстояние, на котором враг может атаковать игрока
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	/// </summary>
 	private float _attackDistance = 2f;
 
 	/// <summary>
-	/// Текущее состояние врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private State _currentState;
 	private float _roamingTime;
@@ -71,38 +70,36 @@ public class EnemyAI : MonoBehaviour
 	private Vector3 _startingPosition;
 
 	/// <summary>
-	/// Скорость хождения врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private float _roamingSpeed;
 
 	/// <summary>
-	/// Скорость врага при преследовании.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
-	private float _сhasingSpeed;
+	private float _chasingSpeed;
 
 	/// <summary>
-	/// Время между атаками врага.
+	/// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private float _nextAttackTime = 0f;
 
 	/// <summary>
-	/// Время проверки направления движения врага.
+	/// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private float _nextCheckDirctionTime = 0f;
 
 	/// <summary>
-	/// Чат для проверки направления движения врага.
+	/// пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private float _checkDirectionDuration = 0.1f;
 
 	/// <summary>
-	/// Последняя позиция врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private Vector3 _lastPosition;
 
-	#endregion
-
-	#region Методы
+	#region пїЅпїЅпїЅпїЅпїЅпїЅ
 	private void Awake()
 	{
 		_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -110,7 +107,7 @@ public class EnemyAI : MonoBehaviour
 		_navMeshAgent.updateUpAxis = false;
 		_currentState = _startingState;
 		_roamingSpeed = _navMeshAgent.speed;
-		_сhasingSpeed = _navMeshAgent.speed * _chasingSpeedMultiplier;
+		_chasingSpeed = _navMeshAgent.speed * _chasingSpeedMultiplier;
 	}
 
 	private void Update()
@@ -118,7 +115,7 @@ public class EnemyAI : MonoBehaviour
 		StateHandler();
 		MovementDurectionHandler();
 	}
-
+	
 	public void SetDeadState()
 	{
 		_navMeshAgent.ResetPath();
@@ -127,16 +124,16 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Скорость анимации блуждания врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
-	/// <returns>Скорость блуждания.</returns>
+	/// <returns>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
 	public float GetRoamingAnimationSpeed()
 	{
 		return _navMeshAgent.speed / _roamingSpeed;
 	}
 
 	/// <summary>
-	/// Выбор состояния врага и выполнение соответствующих действий.
+	/// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private void StateHandler()
 	{
@@ -171,7 +168,7 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Проверяет и изменяет текущий статус врага.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private void CheckCurrentState()
 	{
@@ -200,7 +197,7 @@ public class EnemyAI : MonoBehaviour
 		{
 			if (newState == State.Chasing)
 			{
-				_navMeshAgent.speed = _сhasingSpeed;
+				_navMeshAgent.speed = _chasingSpeed;
 				_navMeshAgent.ResetPath();
 			}
 
@@ -221,7 +218,7 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Цель преследования врага.
+	/// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private void CasingTarget()
 	{
@@ -229,7 +226,7 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Враг атакует цель.
+	/// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private void AttackingTarget()
 	{
@@ -274,10 +271,10 @@ public class EnemyAI : MonoBehaviour
 
 
 	/// <summary>
-	/// Разворачивает врага в сторону цели.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
-	/// <param name="sourcePosition">Изначальное положение.</param>
-	/// <param name="targetPosition">Последнее положение.</param>
+	/// <param name="sourcePosition">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</param>
+	/// <param name="targetPosition">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</param>
 	private void ChangeFacingDirection(Vector3 sourcePosition, Vector3 targetPosition)
 	{
 		if (sourcePosition.x > targetPosition.x)
@@ -291,7 +288,7 @@ public class EnemyAI : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Состояния врага в игре.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private enum State
 	{
@@ -304,10 +301,10 @@ public class EnemyAI : MonoBehaviour
 
 	#endregion
 
-	#region Свойства
+	#region пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	/// <summary>
-	/// Бежит ли враг в данный момент.
+	/// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	public bool IsRunning
 	{
@@ -328,7 +325,7 @@ public class EnemyAI : MonoBehaviour
 
 	#endregion
 	
-	#region События Unity
+	#region пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Unity
 
 	public event Action OnEnemyAttack;
 

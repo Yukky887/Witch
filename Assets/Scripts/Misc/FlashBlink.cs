@@ -10,19 +10,24 @@ public class FlashBlink : MonoBehaviour
 	private Material defaultMaterial;
 	private SpriteRenderer spriteRenderer;
 	private bool isBlinking;
-
+	
+	/// <summary>
+	/// Запускавая
+	/// </summary>
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		defaultMaterial = spriteRenderer.material;
 
 		isBlinking = false;
+	}
 
+	private void Start()
+	{
 		if (_damagedleObject is Player)
 		{
 			(_damagedleObject as Player).TakeHit += DamagableObject_TakeHit;
 		}
-
 	}
 
 	private void DamagableObject_TakeHit()
@@ -59,5 +64,13 @@ public class FlashBlink : MonoBehaviour
 	{
 		SetDefaultMaterial();
 		isBlinking = false;
+	}
+
+	private void OnDestroy()
+	{
+		if (_damagedleObject is Player)
+		{
+			(_damagedleObject as  Player).TakeHit -= DamagableObject_TakeHit;
+		}
 	}
 }

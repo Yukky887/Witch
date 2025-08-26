@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// Ссылаемся на объект, который должен быть добавлен в инспекторе Unity.
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Unity.
 /// </summary>
 [RequireComponent(typeof(PolygonCollider2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -48,7 +48,7 @@ public class EnemiEntity : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Обрабатывает пересечение коллайдера меча скелета с другими.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	/// <param name="collision"></param>
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -57,7 +57,7 @@ public class EnemiEntity : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Выключает коллайдер.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	public void SetPolygonColliderTurnOff()
 	{
@@ -65,7 +65,7 @@ public class EnemiEntity : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Включает коллайдер.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	public void SetPolygonColliderTurnOn()
 	{
@@ -73,9 +73,9 @@ public class EnemiEntity : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Отнимает у врага здоровье.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
-	/// <param name="damage">Получаемый урон.</param>
+	/// <param name="damage">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.</param>
 	public void TakeDamage(int damage)
 	{
 		_currentHealth -= damage;
@@ -86,7 +86,7 @@ public class EnemiEntity : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Отслеживает, когда враг должен умереть.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private void DetectDeath()
 	{

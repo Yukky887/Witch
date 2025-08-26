@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering.UI;
 
 /// <summary>
-/// Определяет активное оружие игрока в игре.
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ.
 /// </summary>
 public class ActiveWeapon : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class ActiveWeapon : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Ссылка на активное оружие, которое будет использоваться в игре.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
 	[SerializeField] private Sword sword;
 
@@ -31,20 +31,20 @@ public class ActiveWeapon : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Возвращает текущее активное оружие игрока.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
 	/// </summary>
-	/// <returns>Текущее активное оружие игрока.</returns>
+	/// <returns>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
 	public Sword GetActiveWeapon()
 	{
 		return sword;
 	}
 
 	/// <summary>
-	/// Поворачивает оружее в сторону мыши.
+	/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 	/// </summary>
 	private void FillowMausPosition()
 	{
-		Vector3 mosePos = GameInput.Instance.GetMousePosition();
+		Vector3 mosePos = GameInput.GetMousePosition();
 		Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition();
 
 		if (mosePos.x < playerPosition.x)

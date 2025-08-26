@@ -519,6 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 52824878}
+  _flashBlink: {fileID: 0}
 --- !u!114 &224736234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,6 +654,7 @@ GameObject:
   - component: {fileID: 410704513}
   - component: {fileID: 410704512}
   - component: {fileID: 410704511}
+  - component: {fileID: 410704514}
   m_Layer: 0
   m_Name: NavMeshSurface
   m_TagString: Untagged
@@ -722,6 +724,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &410704514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410704510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a9531706b60b04eb474d47b847add9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &513372676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1395,10 +1409,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 87991639552864449, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 965074987906513991, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
       propertyPath: m_Name
       value: Skeleton
