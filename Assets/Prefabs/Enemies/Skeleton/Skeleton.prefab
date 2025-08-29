@@ -99,15 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae46f1efaefea04c86fe942304daa7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingState: 1
-  _roamingDistanceMax: 7
-  _roamingDistanceMin: 3
-  _roamingTimerMax: 2
-  _isCheasing: 1
-  _chasingDistance: 5
-  _chasingSpeedMultiplier: 2
-  _isAttackingEnemy: 1
-  _attackRete: 1
+  startingState: 0
+  roamingDistanceMax: 7
+  roamingDistanceMin: 3
+  roamingTimerMax: 2
+  isChasing: 1
+  chasingDistance: 5
+  chasingSpeedMultiplier: 2
+  isAttackingEnemy: 1
+  attackRete: 2
 --- !u!61 &3615854570798612107
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06ed0c45952fac4ca7a04caaf58350c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 11400000, guid: 55b8285be3298e1459aee7d8f515768c, type: 2}
+  enemy: {fileID: 11400000, guid: 55b8285be3298e1459aee7d8f515768c, type: 2}
 --- !u!60 &87991639552864449
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -434,6 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14c0ed04933a604d827f43c1ff3ea57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyAI: {fileID: 7028093703566811981}
-  _enemyEntity: {fileID: 5725185988295332603}
-  _enemyShadow: {fileID: 2200924801640837734}
+  enemyAI: {fileID: 7028093703566811981}
+  enemyEntity: {fileID: 5725185988295332603}
+  enemyShadow: {fileID: 2200924801640837734}

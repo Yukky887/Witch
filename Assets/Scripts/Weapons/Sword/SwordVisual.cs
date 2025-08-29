@@ -1,105 +1,50 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordVisual : MonoBehaviour
 {
+	private static readonly int AttackLightHash = Animator.StringToHash(AttackLight);
+	private static readonly int AttackStrong = Animator.StringToHash(AttackSrtong);
 	[SerializeField] private Sword sword;
+	
+	private Animator _animator;
 
-	/// <summary>
-	/// ������������� ��������� ��� ���������� ���������� ����� ����.
-	/// </summary>
-	private Animator animator;
+	private const string AttackLight = "AttackLight";
+	private const string AttackSrtong = "AttackStrong";
 
-	/// <summary>
-	/// ������� ��� ������� �������� ������� ����� ����.
-	/// </summary>
-	const string attackLight = "AttackLight";
 
-	/// <summary>
-	/// ������� ��� ������� �������� �������� ����� ����.
-	/// </summary>
-	const string attackSrtong = "AttackStrong";
-
-	/// <summary>
-	/// ����� �� ������������ ������ ����.
-	/// </summary>
-	private bool canQueueNextAttack = false;
-
-	/// <summary>
-	/// ������������ �� ������ ������ ����.
-	/// </summary>
-	private bool queueNextAttack = false;
-
-	/// <summary>
-	/// ��������� �������� ��� ������������� �������.
-	/// </summary>
+	private bool _canQueueNextAttack;
+	private bool _queueNextAttack;
+	
 	private void Awake()
 	{
-		animator = GetComponent<Animator>();
+		_animator = GetComponent<Animator>();
 	}
-
-	/// <summary>
-	/// ������������� �� ������� ����� ���� ��� ������� �������.
-	/// </summary>
+	
 	private void Start()
 	{
 		sword.OnSwordSwing += Sword_OnSwordSwing;
 	}
-
-	/// <summary>
-	/// ��������� �������� ����� ���� ��� ������������ ������� OnSwordSwing.
-	/// </summary>
+	
 	private void Sword_OnSwordSwing(Sword.SwordAttackType type)
 	{
 		if (type == Sword.SwordAttackType.Light)
 		{
-			animator.SetTrigger(attackLight);
+			_animator.SetTrigger(AttackLightHash);
 		}
 		else if (type == Sword.SwordAttackType.Strong)
 		{
-			animator.SetTrigger(attackSrtong);
+			_animator.SetTrigger(AttackStrong);
 		}
 	}
 
-	public void TriggerStartWindowCombo()
-	{
-		canQueueNextAttack = true;
-
-		if (queueNextAttack is true)
-		{
-			PlayNextAttack();
-			queueNextAttack = false;
-		}
-	}
 	public void TriggerEndWindowCombo()
 	{
-		canQueueNextAttack = false;
-	}
-
-	public void OnAttackInput()
-	{
-		if (canQueueNextAttack)
-		{
-			PlayNextAttack();
-		} 
-		else
-		{
-			queueNextAttack = true;
-		}
-	}
-
-	private void PlayNextAttack()
-	{
-		sword.Attack(Sword.SwordAttackType.Strong);
-		canQueueNextAttack = false;
-		queueNextAttack = false;
+		_canQueueNextAttack = false;
 	}
 
 	public void TriggerEndAttackAnimation()
 	{
-		sword.AttackPoligonColliderTurnOff();
+		sword.AttackColliderTurnOff();
 	}
 
 	private void OnDestroy()

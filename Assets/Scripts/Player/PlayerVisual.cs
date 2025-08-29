@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
-	[SerializeField] private Player _player;
-	[SerializeField] private FlashBlink _flashBlink;
+	private static readonly int Die = Animator.StringToHash(IsDie);
+	private static readonly int Running = Animator.StringToHash(IsRunning);
+	
+	private Player player;
+	private FlashBlink flashBlink;
 	
 	private Animator _animator;
-	private SpriteRenderer spriteRenderer;
+	private SpriteRenderer _spriteRenderer;
 	
-	private const string isRunning = "IsRunning";
-	private const string IS_DIE = "isDie";
+	private const string IsRunning = "IsRunning";
+	private const string IsDie = "isDie";
 	
 	private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-		_flashBlink = GetComponent<FlashBlink>();
+		flashBlink = GetComponent<FlashBlink>();
 	}
 
 	private void Start()
@@ -25,13 +28,13 @@ public class PlayerVisual : MonoBehaviour
 
 	private void Player_OnPlayerDeath()
 	{
-		_animator.SetBool(IS_DIE, true);
-		_flashBlink.StopBlinking();
+		_animator.SetBool(Die, true);
+		flashBlink.StopBlinking();
 	}
 	
 	private void Update()
     {
-		_animator.SetBool(isRunning, Player.Instance.IsRunning());
+		_animator.SetBool(Running, Player.Instance.IsRunning());
 		
 		if (Player.Instance.IsAlive())
 		{
@@ -42,17 +45,10 @@ public class PlayerVisual : MonoBehaviour
 	
 	private void AdjustPlayerFacingDirection()
     {
-        Vector3 mosePos = GameInput.GetMousePosition();
-        Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition();
+        var mosePos = GameInput.GetMousePosition();
+        var playerPosition = Player.Instance.GetPlayerScreenPosition();
 
-        if (mosePos.x < playerPosition.x)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
+        _spriteRenderer.flipX = mosePos.x < playerPosition.x;
 
     }
 	

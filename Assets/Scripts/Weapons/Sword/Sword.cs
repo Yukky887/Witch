@@ -1,64 +1,34 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-	/// <summary>
-	/// Слабый урон меча.
-	/// </summary>
-	[SerializeField] private int _liteHitDamage = 5;
-
-	/// <summary>
-	/// Сильный урон меча.
-	/// </summary>
-	[SerializeField] private int _strongHitDamage = 8;
-
-	/// <summary>
-	/// Область атаки меча.
-	/// </summary>
+	[SerializeField] private int liteHitDamage = 5;
+	[SerializeField] private int strongHitDamage = 8;
+	
 	private PolygonCollider2D _polygonCollider2D;
-
-	/// <summary>
-	/// Компонент PolygonCollider2D для определения области атаки меча.
-	/// </summary>
+	
 	private void Awake()
 	{
 		_polygonCollider2D = GetComponent<PolygonCollider2D>();
 	}
 
-	/// <summary>
-	/// Выключает коллайдер области атаки меча при старте игры.
-	/// </summary>
 	private void Start()
 	{
-		AttackPoligonColliderTurnOff();
+		AttackColliderTurnOff();
 	}
 
-	/// <summary>
-	/// Виды атаки мечом.
-	/// </summary>
 	public enum SwordAttackType
 	{
 		Light,
 		Strong
 	}
-
-	/// <summary>
-	/// Событие, вызываемое при атаке мечом.
-	/// </summary>
+	
 	public event Action<SwordAttackType> OnSwordSwing;
-
-
-	/// <summary>
-	/// Атакует мечом с заданным типом атаки.
-	/// </summary>
-	/// <param name="attackType">Тип аттаки.</param>
+	
 	public void Attack(SwordAttackType attackType)
 	{
-		AttackPoligonColliderTurnOn();
+		AttackColliderTurnOn();
 
 		OnSwordSwing?.Invoke(attackType);
 	}
@@ -67,22 +37,16 @@ public class Sword : MonoBehaviour
 	{
 		if (collision.TryGetComponent(out EnemiEntity enemiEntity))
 		{
-			enemiEntity.TakeDamage(_liteHitDamage);
+			enemiEntity.TakeDamage(liteHitDamage);
 		}
 	}
-
-	/// <summary>
-	/// Выключает коллайдер области атаки меча после завершения атаки.
-	/// </summary>
-	public void AttackPoligonColliderTurnOff()
+	
+	public void AttackColliderTurnOff()
 	{
 		_polygonCollider2D.enabled = false;
 	}
-
-	/// <summary>
-	/// Включает коллайдер области атаки меча перед атакой.
-	/// </summary>
-	private void AttackPoligonColliderTurnOn()
+	
+	private void AttackColliderTurnOn()
 	{
 		_polygonCollider2D.enabled = true;
 	}

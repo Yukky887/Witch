@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SwordSlashVisual : MonoBehaviour
 {
+	private static readonly int AttackHash = Animator.StringToHash(Attack);
 
 	[SerializeField] private Sword.SwordAttackType swordAttackType;
 	[SerializeField] private Sword sword;
-	
-	const string attack = "Attack";
-	private Animator animator;
+
+	private const string Attack = "Attack";
+	private Animator _animator;
 	
 	private void Awake()
 	{
-		animator = GetComponent<Animator>();
+		_animator = GetComponent<Animator>();
 	}
 	
 	private void Start()
@@ -29,7 +27,7 @@ public class SwordSlashVisual : MonoBehaviour
 			return;
 		}
 
-		animator.SetTrigger(attack);
+		_animator.SetTrigger(AttackHash);
 	}
 	
 	private void OnDestroy()

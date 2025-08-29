@@ -2,75 +2,76 @@ using UnityEngine;
 
 public class FlashBlink : MonoBehaviour
 {
-	[SerializeField] private MonoBehaviour _damagedleObject;
-	[SerializeField] private Material _blinlMaterial;
-	[SerializeField] private float _blinkDuration = 0.2f;
+	[SerializeField] private MonoBehaviour damageableObject;
+	[SerializeField] private Material blinkMaterial;
+	[SerializeField] private float blinkDuration = 0.2f;
 
-	private float blinkTimer;
-	private Material defaultMaterial;
-	private SpriteRenderer spriteRenderer;
-	private bool isBlinking;
+	private float _blinkTimer;
+	private Material _defaultMaterial;
+	private SpriteRenderer _spriteRenderer;
+	private bool _isBlinking;
 	
-	/// <summary>
-	/// Запускавая
-	/// </summary>
 	private void Awake()
 	{
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		defaultMaterial = spriteRenderer.material;
+		_spriteRenderer = GetComponent<SpriteRenderer>();
+		_defaultMaterial = _spriteRenderer.material;
 
-		isBlinking = false;
+		_isBlinking = false;
 	}
 
 	private void Start()
 	{
-		if (_damagedleObject is Player)
+		if (damageableObject is Player player)
 		{
-			(_damagedleObject as Player).TakeHit += DamagableObject_TakeHit;
+			player.TakeHit += DamageableObject_TakeHit;
 		}
 	}
 
-	private void DamagableObject_TakeHit()
+	private void DamageableObject_TakeHit()
 	{
 		SetBlinkMaterial();
 	}
 
-	void Update()
+	private void Update()
 	{
-		if (isBlinking)
+		if (!_isBlinking)
 		{
-			blinkTimer -= Time.deltaTime;
-			if (blinkTimer < 0)
-			{
-				SetDefaultMaterial();
-				StopBlinking();
-			}
+			return;
 		}
+		_blinkTimer -= Time.deltaTime;
+		if (!(_blinkTimer < 0))
+		{
+			return;
+		}
+			
+		SetDefaultMaterial();
+		StopBlinking();
 	}
-
+	
+	public void StopBlinking()
+	{
+		SetDefaultMaterial();
+		_isBlinking = false;
+	}
+	
 	private void SetBlinkMaterial()
 	{
-		isBlinking = true;
-		blinkTimer = _blinkDuration;
-		spriteRenderer.material = _blinlMaterial;
+		_isBlinking = true;
+		_blinkTimer = blinkDuration;
+		_spriteRenderer.material = blinkMaterial;
 	}
 
 	private void SetDefaultMaterial()
 	{
-		spriteRenderer.material = defaultMaterial;
+		_spriteRenderer.material = _defaultMaterial;
 	}
 
-	public void StopBlinking()
-	{
-		SetDefaultMaterial();
-		isBlinking = false;
-	}
 
 	private void OnDestroy()
 	{
-		if (_damagedleObject is Player)
+		if (damageableObject is Player player)
 		{
-			(_damagedleObject as  Player).TakeHit -= DamagableObject_TakeHit;
+			player.TakeHit -= DamageableObject_TakeHit;
 		}
 	}
 }

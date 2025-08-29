@@ -4,19 +4,24 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SkeletonVisual : MonoBehaviour
 {
+	private static readonly int Die = Animator.StringToHash(IsDie);
+	private static readonly int Hit = Animator.StringToHash(TakeHit);
+	private static readonly int Running = Animator.StringToHash(IsRunning);
+	private static readonly int SpeedMultiplier = Animator.StringToHash(ChasingSpeedMultiplier);
+	private static readonly int Attack1 = Animator.StringToHash(Attack);
 
-	[SerializeField] private EnemyAI _enemyAI;
-	[SerializeField] private EnemiEntity _enemyEntity;
-	[SerializeField] private GameObject _enemyShadow;
+	[SerializeField] private EnemyAI enemyAI;
+	[SerializeField] private EnemiEntity enemyEntity;
+	[SerializeField] private GameObject enemyShadow;
 
 
 	private Animator _animator;
 	
-	private const string IS_RUNNING = "isRunning";
-	private const string ATTACK = "Attack";
-	private const string TAKE_HIT = "TakeHit";
-	private const string IS_DIE = "isDie";
-	private const string CHASING_SPEED_MULTIPLIER = "ChasingSpeedMultiplier";
+	private const string IsRunning = "isRunning";
+	private const string Attack = "Attack";
+	private const string TakeHit = "TakeHit";
+	private const string IsDie = "isDie";
+	private const string ChasingSpeedMultiplier = "ChasingSpeedMultiplier";
 
 
 	SpriteRenderer _spriteRenderer;
@@ -30,52 +35,51 @@ public class SkeletonVisual : MonoBehaviour
 
 	private void Start()
 	{
-		_enemyAI.OnEnemyAttack += _enemyAI_OnEnemyAttack;
+		enemyAI.OnEnemyAttack += _enemyAI_OnEnemyAttack;
 
-		_enemyEntity.OnTakeHit += _enemyEntity_OnTakeHit;
+		enemyEntity.OnTakeHit += _enemyEntity_OnTakeHit;
 
-		_enemyEntity.OnDie += _enemyEntity_OnDie;
+		enemyEntity.OnDie += _enemyEntity_OnDie;
 	}
 
 	private void _enemyEntity_OnDie()
 	{
-		_animator.SetBool(IS_DIE, true);
-		_spriteRenderer.sortingOrder = -1; // ������ ������� ���������, ����� ������ �� ���������� ������ �������
-		_enemyShadow.SetActive(false); // ��������� ����, ���� ��� ����
+		_animator.SetBool(Die, true);
+		_spriteRenderer.sortingOrder = -1;
+		enemyShadow.SetActive(false);
 		Debug.Log("Enemy has died and AI is disabled.");
 	}
 
 	private void _enemyEntity_OnTakeHit()
 	{
-		_animator.SetTrigger(TAKE_HIT);
+		_animator.SetTrigger(Hit);
 	}
 
 	private void Update()
 	{
-		_animator.SetBool(IS_RUNNING, _enemyAI.IsRunning);
-		_animator.SetFloat(CHASING_SPEED_MULTIPLIER, _enemyAI.GetRoamingAnimationSpeed());
+		_animator.SetBool(Running, enemyAI.IsRunning);
+		_animator.SetFloat(SpeedMultiplier, enemyAI.GetRoamingAnimationSpeed());
 	}
 	
 	public void TriggerAttackAnimationTurnOn()
 	{
-		_enemyEntity.SetPolygonColliderTurnOn();
+		enemyEntity.SetPolygonColliderTurnOn();
 	}
 	
 	public void TriggerAttackAnimationTurnOff()
 	{
-		_enemyEntity.SetPolygonColliderTurnOff();
+		enemyEntity.SetPolygonColliderTurnOff();
 	}
 	
 	private void _enemyAI_OnEnemyAttack()
 	{
-		_animator.SetTrigger(ATTACK);
+		_animator.SetTrigger(Attack1);
 	}
 	
 	private void OnDestroy()
 	{
-		_enemyAI.OnEnemyAttack -= _enemyAI_OnEnemyAttack;	
-		_enemyEntity.OnTakeHit -= _enemyEntity_OnTakeHit;
-		_enemyEntity.OnDie -= _enemyEntity_OnDie;
+		enemyAI.OnEnemyAttack -= _enemyAI_OnEnemyAttack;	
+		enemyEntity.OnTakeHit -= _enemyEntity_OnTakeHit;
+		enemyEntity.OnDie -= _enemyEntity_OnDie;
 	}
-
 }

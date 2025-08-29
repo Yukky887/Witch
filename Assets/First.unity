@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cbb6d698bac5b458dfe83c7a90d846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movingSpeed: 5
-  _maxHealth: 3
-  _damageRecoveryTime: 0.5
+  movingSpeed: 10
+  maxHealth: 30
+  damageRecoveryTime: 0.5
 --- !u!50 &52824879
 Rigidbody2D:
   serializedVersion: 4
@@ -295,8 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f396c88b6cc89bd499c8604cfbc09c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackForce: 3
-  _knockBackMovingTimerMax: 0.3
+  knockBackForce: 3
+  knockBackMovingTimerMax: 0.3
 --- !u!1 &129168237
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96a8d8b875e22e43b0aed24a628bd3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 52824878}
-  _flashBlink: {fileID: 0}
 --- !u!114 &224736234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,9 +530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0223c21e06f6f414da97eb5caaa8ba8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damagedleObject: {fileID: 52824878}
-  _blinlMaterial: {fileID: 2100000, guid: 2ca1e1ce45245af478025072520d9bb9, type: 2}
-  _blinkDuration: 0.2
+  damageableObject: {fileID: 52824878}
+  blinkMaterial: {fileID: 2100000, guid: 2ca1e1ce45245af478025072520d9bb9, type: 2}
+  blinkDuration: 0.2
 --- !u!1001 &244800237
 PrefabInstance:
   m_ObjectHideFlags: 0

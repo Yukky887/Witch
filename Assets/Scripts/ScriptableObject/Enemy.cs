@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu()]
+[CreateAssetMenu]
 public class Enemy : ScriptableObject
 {
 	public string enemyName;

@@ -6,20 +6,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	
-	[SerializeField] private float _movingSpeed = 10f;
-	[SerializeField] private int _maxHealth = 30;
-	[SerializeField] private float _damageRecoveryTime = 0.5f;
+	[SerializeField] private float movingSpeed = 10f;
+	[SerializeField] private int maxHealth = 30;
+	[SerializeField] private float damageRecoveryTime = 0.5f;
 
 	
 	private Rigidbody2D _rb;
 	private KnockBack _knockBack;
 	private int _currentHealth;
 	private bool _isAlive;
-	private const float _minMovingSpeed = 0.1f;
+	private const float MinMovingSpeed = 0.1f;
 	private bool _isRunning;
 	private bool _canTakeDamage = true;
 	private int _comboStep;
-
+	
+	private Camera _camera;
+	
 	private Vector2 _inputVector;
 	
 	public static Player Instance { get; private set; }
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
 	
 	private void Awake()
     {
+	    _camera = Camera.main;
         Instance = this;
         _rb = GetComponent<Rigidbody2D>();
 		_knockBack = GetComponent<KnockBack>();
@@ -37,13 +40,13 @@ public class Player : MonoBehaviour
 	private void Start()
 	{
 		_isAlive = true;
-		_currentHealth = _maxHealth;
+		_currentHealth = maxHealth;
 		GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
 	}
 	
 	private void Update()
     {
-        _inputVector = GameInput.Instance.GetMovementVector();
+	    _inputVector = GameInput.Instance.GetMovementVector();
     }
 	
 	public bool IsRunning()
@@ -58,7 +61,8 @@ public class Player : MonoBehaviour
 	
 	public Vector3 GetPlayerScreenPosition()
     {
-        var playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        var playerScreenPosition = _camera.WorldToScreenPoint(transform.position);
+        
         return playerScreenPosition;
     }
 	
@@ -85,13 +89,13 @@ public class Player : MonoBehaviour
 		}
 		_isAlive = false;
 		GameInput.Instance.DisableMovement();
-		_knockBack.StopKnockBackMovment();
+		_knockBack.StopKnockBackMovement();
 		OnPlayerDeath?.Invoke();
 	}
 	
 	private IEnumerator DamageRecoveryRouting()
 	{
-		yield return new WaitForSeconds(_damageRecoveryTime);
+		yield return new WaitForSeconds(damageRecoveryTime);
 		_canTakeDamage = true;
 	} 
 	
@@ -127,9 +131,9 @@ public class Player : MonoBehaviour
     {
         var vector2 = GameInput.Instance.GetMovementVector();
 
-        _rb.MovePosition(_rb.position + vector2 * (_movingSpeed * Time.fixedDeltaTime));
+        _rb.MovePosition(_rb.position + vector2 * (movingSpeed * Time.fixedDeltaTime));
 
-        if (Mathf.Abs(vector2.x) > _minMovingSpeed || Mathf.Abs(vector2.y) > _minMovingSpeed)
+        if (Mathf.Abs(vector2.x) > MinMovingSpeed || Mathf.Abs(vector2.y) > MinMovingSpeed)
         {
             _isRunning = true;
         }
