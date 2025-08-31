@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6133860669491767739}
   - component: {fileID: 5539101049945079812}
   - component: {fileID: 4248643842884603328}
-  - component: {fileID: 945730233238852685}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -49,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061abd3c7484dbd4ca1b960a6e00fdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _liteHitDamage: 1
-  _strongHitDamage: 2
+  liteHitDamage: 1
+  strongHitDamage: 1
 --- !u!60 &4248643842884603328
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -120,41 +119,6 @@ PolygonCollider2D:
       - {x: 2.3630576, y: 2.9880414}
       - {x: 1.5783174, y: 3.0033386}
   m_UseDelaunayMesh: 0
---- !u!70 &945730233238852685
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518254055507928285}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.405499, y: -0.8232171}
-  m_Size: {x: 0.19412804, y: 0.2096741}
-  m_Direction: 1
 --- !u!1 &1369770748601287383
 GameObject:
   m_ObjectHideFlags: 0

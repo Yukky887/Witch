@@ -10,33 +10,27 @@ public class GameInput : MonoBehaviour
     
     public event Action<Sword.SwordAttackType> OnPlayerAttack;
 
+    public event Action OnPlayerDash;
+
     private void Awake()
     {
         Instance = this;
         _playerInputActions = new PlayerInputActions();
         _playerInputActions.Enable();
 		_playerInputActions.Combat.Attack.started += PlayerAttack_started;
+		_playerInputActions.Player.Dash.started += PlayerDash_performed;
     }
-    private void OnDestroy()
-    {
-	    _playerInputActions.Combat.Attack.started -= PlayerAttack_started;
-    }
-	
-	private void PlayerAttack_started(InputAction.CallbackContext context)
-	{
-		OnPlayerAttack?.Invoke(Sword.SwordAttackType.Light);
-	}
-	
+
 	public Vector2 GetMovementVector()
     {
-        Vector2 inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
+        var inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
 
         return inputVector;
     }
 	
     public static Vector3 GetMousePosition()
     {
-        Vector3 mousePos = Mouse.current.position.ReadValue();
+        var mousePos = Mouse.current.position.ReadValue();
 
         return mousePos;
     }
@@ -45,4 +39,20 @@ public class GameInput : MonoBehaviour
     {
         _playerInputActions.Disable();
 	}
+	
+    private void PlayerDash_performed(InputAction.CallbackContext obj)
+    {
+	    OnPlayerDash?.Invoke();
+    }
+    
+	private void PlayerAttack_started(InputAction.CallbackContext context)
+	{
+		OnPlayerAttack?.Invoke(Sword.SwordAttackType.Light);
+	}
+	
+    private void OnDestroy()
+    {
+	    _playerInputActions.Combat.Attack.started -= PlayerAttack_started;
+	    _playerInputActions.Player.Dash.started -= PlayerDash_performed;
+    }
 }

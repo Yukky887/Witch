@@ -104,10 +104,10 @@ MonoBehaviour:
   roamingDistanceMin: 3
   roamingTimerMax: 2
   isChasing: 1
-  chasingDistance: 5
+  chasingDistance: 8
   chasingSpeedMultiplier: 2
   isAttackingEnemy: 1
-  attackRete: 2
+  attackRete: 1
 --- !u!61 &3615854570798612107
 BoxCollider2D:
   m_ObjectHideFlags: 0

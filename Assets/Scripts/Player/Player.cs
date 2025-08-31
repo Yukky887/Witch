@@ -9,7 +9,12 @@ public class Player : MonoBehaviour
 	[SerializeField] private float movingSpeed = 10f;
 	[SerializeField] private int maxHealth = 30;
 	[SerializeField] private float damageRecoveryTime = 0.5f;
-
+	[SerializeField] private float attackCoolDownTime = 0.25f;
+	[Space(20f)]
+	[SerializeField] private int dashSpeed = 2;
+	[SerializeField] private float dashTime = 0.2f;
+	[SerializeField] private TrailRenderer trail;
+	[SerializeField] private float dashCoolDownTime = 0.25f;
 	
 	private Rigidbody2D _rb;
 	private KnockBack _knockBack;
@@ -19,6 +24,9 @@ public class Player : MonoBehaviour
 	private bool _isRunning;
 	private bool _canTakeDamage = true;
 	private int _comboStep;
+	private float _initialMoveSpeed;
+	private bool _isDashing;
+	private bool _isAttacking;
 	
 	private Camera _camera;
 	
@@ -35,6 +43,7 @@ public class Player : MonoBehaviour
         Instance = this;
         _rb = GetComponent<Rigidbody2D>();
 		_knockBack = GetComponent<KnockBack>();
+		_initialMoveSpeed = movingSpeed;
 	}
 	
 	private void Start()
@@ -42,8 +51,10 @@ public class Player : MonoBehaviour
 		_isAlive = true;
 		_currentHealth = maxHealth;
 		GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
+		GameInput.Instance.OnPlayerDash += GameInput_OnPlayerDash;
 	}
-	
+
+
 	private void Update()
     {
 	    _inputVector = GameInput.Instance.GetMovementVector();
@@ -81,6 +92,34 @@ public class Player : MonoBehaviour
 		DetectDeath();
 	}
 
+	private IEnumerator DashRoutine()
+	{
+		_isDashing = true;
+		movingSpeed *= movingSpeed;
+		trail.emitting = true;
+		
+		yield return new WaitForSeconds(dashTime);
+		
+		trail.emitting = false;
+		movingSpeed = _initialMoveSpeed;
+		
+		yield return new WaitForSeconds(dashCoolDownTime);
+		_isDashing = false;
+	}
+	
+	private void GameInput_OnPlayerDash()
+	{
+		Dash();
+	}
+
+	private void Dash()
+	{
+		if (!_isDashing)
+		{
+			StartCoroutine(DashRoutine());
+		}
+	}
+	
 	private void DetectDeath()
 	{
 		if (_currentHealth > 0 || !_isAlive)
@@ -97,16 +136,31 @@ public class Player : MonoBehaviour
 	{
 		yield return new WaitForSeconds(damageRecoveryTime);
 		_canTakeDamage = true;
-	} 
+	}
+
+	private IEnumerator AttackRecoveryRouting()
+	{
+		_isAttacking = true;
+		
+		yield return new WaitForSeconds(attackCoolDownTime);
+		
+		_isAttacking = false;
+	}
 	
 	private void GameInput_OnPlayerAttack(Sword.SwordAttackType _)
 	{
+		if (_isAttacking)
+		{
+			return;
+		}
+		
 		Sword.SwordAttackType typeToUse;
-
+		
 		if (_comboStep == 0)
 		{
 			typeToUse = Sword.SwordAttackType.Light;
 			_comboStep = 1;
+			
 		}
 		else
 		{
@@ -115,6 +169,8 @@ public class Player : MonoBehaviour
 		}
 
 		ActiveWeapon.Instance.GetActiveWeapon().Attack(typeToUse);
+		
+		StartCoroutine(AttackRecoveryRouting());
 	}
 	
 	private void FixedUpdate()
@@ -146,5 +202,6 @@ public class Player : MonoBehaviour
 	private void OnDestroy()
 	{
 		GameInput.Instance.OnPlayerAttack -= GameInput_OnPlayerAttack;
+		GameInput.Instance.OnPlayerDash -= GameInput_OnPlayerDash;
 	}
 }
