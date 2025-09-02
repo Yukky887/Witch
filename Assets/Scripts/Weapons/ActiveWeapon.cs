@@ -4,6 +4,8 @@ public class ActiveWeapon : MonoBehaviour
 {
 	[SerializeField] private Sword sword;
 	
+	private Player _player;
+	
 	public static ActiveWeapon Instance { get; private set; }
 
 	private void Update()
@@ -26,6 +28,11 @@ public class ActiveWeapon : MonoBehaviour
 	
 	private void FollowMousePosition()
 	{
+		if (Player.Instance.IsAttacking)
+		{
+			return;
+		}
+		
 		var mosePos = GameInput.GetMousePosition();
 		var playerPosition = Player.Instance.GetPlayerScreenPosition();
 

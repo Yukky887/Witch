@@ -5,8 +5,8 @@ public class PlayerVisual : MonoBehaviour
 	private static readonly int Die = Animator.StringToHash(IsDie);
 	private static readonly int Running = Animator.StringToHash(IsRunning);
 	
-	private Player player;
-	private FlashBlink flashBlink;
+	private Player _player;
+	private FlashBlink _flashBlink;
 	
 	private Animator _animator;
 	private SpriteRenderer _spriteRenderer;
@@ -18,7 +18,7 @@ public class PlayerVisual : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-		flashBlink = GetComponent<FlashBlink>();
+		_flashBlink = GetComponent<FlashBlink>();
 	}
 
 	private void Start()
@@ -29,7 +29,7 @@ public class PlayerVisual : MonoBehaviour
 	private void Player_OnPlayerDeath()
 	{
 		_animator.SetBool(Die, true);
-		flashBlink.StopBlinking();
+		_flashBlink.StopBlinking();
 	}
 	
 	private void Update()
@@ -40,16 +40,19 @@ public class PlayerVisual : MonoBehaviour
 		{
 			AdjustPlayerFacingDirection(); 
 		}
-
     }
 	
 	private void AdjustPlayerFacingDirection()
     {
+        if (Player.Instance.IsAttacking)
+        {
+	        return;
+        }
+        
         var mosePos = GameInput.GetMousePosition();
         var playerPosition = Player.Instance.GetPlayerScreenPosition();
-
+		
         _spriteRenderer.flipX = mosePos.x < playerPosition.x;
-
     }
 	
 	private void OnDestroy()

@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 	private int _comboStep;
 	private float _initialMoveSpeed;
 	private bool _isDashing;
-	private bool _isAttacking;
+	public bool IsAttacking {get; private set;}
 	
 	private Camera _camera;
 	
@@ -140,16 +140,16 @@ public class Player : MonoBehaviour
 
 	private IEnumerator AttackRecoveryRouting()
 	{
-		_isAttacking = true;
+		IsAttacking = true;
 		
 		yield return new WaitForSeconds(attackCoolDownTime);
 		
-		_isAttacking = false;
+		IsAttacking = false;
 	}
 	
 	private void GameInput_OnPlayerAttack(Sword.SwordAttackType _)
 	{
-		if (_isAttacking)
+		if (IsAttacking)
 		{
 			return;
 		}
