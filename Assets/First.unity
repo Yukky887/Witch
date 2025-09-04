@@ -155,11 +155,13 @@ MonoBehaviour:
   movingSpeed: 4
   maxHealth: 10
   damageRecoveryTime: 0.5
-  attackCoolDownTime: 0.25
+  attackCoolDownTime: 0.3
   dashSpeed: 2
   dashTime: 0.2
   trail: {fileID: 1453158626}
   dashCoolDownTime: 0.25
+  dashCount: 3
+  dashCounterRecoveryTime: 5
 --- !u!50 &52824879
 Rigidbody2D:
   serializedVersion: 5
@@ -1202,6 +1204,17 @@ Transform:
   - {fileID: 1630691859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378294606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8982067270025395009, guid: 98a52e5c64559074c839c90d3df92ebe, type: 3}
+  m_PrefabInstance: {fileID: 8335872898049399094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670ea2db3fc32a241bd359ab091d2207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1453158624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,6 +1897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 5760884049912463399, guid: 98a52e5c64559074c839c90d3df92ebe, type: 3}
+      propertyPath: swordSlashVisual
+      value: 
+      objectReference: {fileID: 1378294606}
     - target: {fileID: 6133860669491767739, guid: 98a52e5c64559074c839c90d3df92ebe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.154
@@ -1940,6 +1957,14 @@ PrefabInstance:
     - target: {fileID: 965074987906513991, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615854570798612107, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5285673
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615854570798612107, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.235846
       objectReference: {fileID: 0}
     - target: {fileID: 7778142998319686526, guid: 55a5616ffa759b34fb095123b05ddbe8, type: 3}
       propertyPath: m_LocalPosition.x

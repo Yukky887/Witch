@@ -24,7 +24,7 @@ public class SkeletonVisual : MonoBehaviour
 	private const string ChasingSpeedMultiplier = "ChasingSpeedMultiplier";
 
 
-	SpriteRenderer _spriteRenderer;
+	private SpriteRenderer _spriteRenderer;
 
 	private void Awake()
 	{

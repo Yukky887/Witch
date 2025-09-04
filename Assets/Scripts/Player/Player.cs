@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 	[SerializeField] private float dashTime = 0.2f;
 	[SerializeField] private TrailRenderer trail;
 	[SerializeField] private float dashCoolDownTime = 0.25f;
+	[SerializeField] private int dashCount = 3;
+	[SerializeField] private float dashCounterRecoveryTime = 5f;
 	
 	private Rigidbody2D _rb;
 	private KnockBack _knockBack;
@@ -26,11 +28,14 @@ public class Player : MonoBehaviour
 	private int _comboStep;
 	private float _initialMoveSpeed;
 	private bool _isDashing;
-	public bool IsAttacking {get; private set;}
+	private bool _isDashCounterReloading;
+	
 	
 	private Camera _camera;
 	
 	private Vector2 _inputVector;
+	
+	public bool IsAttacking {get; private set;}
 	
 	public static Player Instance { get; private set; }
 
@@ -53,8 +58,7 @@ public class Player : MonoBehaviour
 		GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
 		GameInput.Instance.OnPlayerDash += GameInput_OnPlayerDash;
 	}
-
-
+	
 	private void Update()
     {
 	    _inputVector = GameInput.Instance.GetMovementVector();
@@ -114,10 +118,31 @@ public class Player : MonoBehaviour
 
 	private void Dash()
 	{
-		if (!_isDashing)
+		if (_isDashing || dashCount <= 0)
 		{
-			StartCoroutine(DashRoutine());
+			return;
 		}
+		
+		StartCoroutine(DashRoutine());
+		dashCount--;
+		Debug.Log(dashCount);
+		if (!_isDashCounterReloading)
+		{
+			StartCoroutine(DashCountRoutine());
+		}
+	}
+
+	private IEnumerator DashCountRoutine()
+	{
+		while (dashCount < 3)
+		{
+			_isDashCounterReloading = true;
+			yield return new WaitForSeconds(dashCounterRecoveryTime);
+			dashCount++;
+			Debug.Log(dashCount);
+		}
+		
+		_isDashCounterReloading = false;
 	}
 	
 	private void DetectDeath()

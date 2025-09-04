@@ -6,8 +6,9 @@ public class SwordSlashVisual : MonoBehaviour
 
 	[SerializeField] private Sword.SwordAttackType swordAttackType;
 	[SerializeField] private Sword sword;
-
+	
 	private const string Attack = "Attack";
+	
 	private Animator _animator;
 	
 	private void Awake()

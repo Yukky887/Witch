@@ -4,13 +4,13 @@ public class SwordVisual : MonoBehaviour
 {
 	private static readonly int AttackLightHash = Animator.StringToHash(AttackLight);
 	private static readonly int AttackStrong = Animator.StringToHash(AttackSrtong);
-	[SerializeField] private Sword sword;
 	
-	private Animator _animator;
+	[SerializeField] private Sword sword;
 
 	private const string AttackLight = "AttackLight";
 	private const string AttackSrtong = "AttackStrong";
 
+	private Animator _animator;
 
 	private bool _canQueueNextAttack;
 	private bool _queueNextAttack;
@@ -24,7 +24,7 @@ public class SwordVisual : MonoBehaviour
 	{
 		sword.OnSwordSwing += Sword_OnSwordSwing;
 	}
-	
+
 	private void Sword_OnSwordSwing(Sword.SwordAttackType type)
 	{
 		if (type == Sword.SwordAttackType.Light)
