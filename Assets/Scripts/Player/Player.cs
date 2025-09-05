@@ -18,10 +18,13 @@ public class Player : MonoBehaviour
 	[SerializeField] private int dashCount = 3;
 	[SerializeField] private float dashCounterRecoveryTime = 5f;
 	
+	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rb;
 	private KnockBack _knockBack;
+	private Camera _camera;
+	private Vector2 _inputVector;
+	
 	private int _currentHealth;
-	private bool _isAlive;
 	private const float MinMovingSpeed = 0.1f;
 	private bool _isRunning;
 	private bool _canTakeDamage = true;
@@ -30,11 +33,7 @@ public class Player : MonoBehaviour
 	private bool _isDashing;
 	private bool _isDashCounterReloading;
 	
-	
-	private Camera _camera;
-	
-	private Vector2 _inputVector;
-	
+	private bool _isAlive;
 	public bool IsAttacking {get; private set;}
 	
 	public static Player Instance { get; private set; }

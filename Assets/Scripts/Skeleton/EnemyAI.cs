@@ -22,6 +22,8 @@ public class EnemyAI : MonoBehaviour
 	private Vector3 _roamPosition;
 	private NavMeshAgent _navMeshAgent;
 	private State _currentState;
+	private KnockBack _knockBack;
+	private Rigidbody2D _rb;
 	
 	private float _roamingTime;
 	private float _roamingSpeed;

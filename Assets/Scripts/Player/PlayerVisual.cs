@@ -30,6 +30,7 @@ public class PlayerVisual : MonoBehaviour
 	{
 		_animator.SetBool(Die, true);
 		_flashBlink.StopBlinking();
+		_spriteRenderer.sortingOrder = -1;
 	}
 	
 	private void Update()
