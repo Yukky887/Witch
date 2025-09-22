@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [SelectionBase]
 public class Player : MonoBehaviour
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private float dashCoolDownTime = 0.25f;
 	[SerializeField] private int dashCount = 3;
 	[SerializeField] private float dashCounterRecoveryTime = 5f;
+	[SerializeField] private EventSystem eventSystem;
 	
 	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rb;
